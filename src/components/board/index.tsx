@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import Task from "../task";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { movedData, showState, updateData } from "@/reducers/Data";
+import { movedData, updateData } from "@/reducers/Data";
 
 const Board = () => {
 
@@ -34,7 +34,7 @@ const dispatch = useDispatch();
 
       const sourceTasks = data[sourceId].tasks;
       const destinationTasks = data[destinationId].tasks;
-      dispatch(movedData({sourceTasks,destinationTasks,source,destination}));
+      dispatch(movedData({sourceTasks,destinationTasks,source,destination,data}));
 
     }
   

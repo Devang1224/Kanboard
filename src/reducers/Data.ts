@@ -69,8 +69,15 @@ const initialState: DummyData= {
                 assignee:"Ivy",
                 date:"May 15th 23",
             },
-        ],
-
+            {
+                id:25,
+                title:"task-25",
+                summary:"",
+                status:"Resources",
+                assignee:"Ivy",
+                date:"May 15th 23",
+            },
+        ]
     },
     
     1:{
@@ -230,58 +237,61 @@ export const dataSlice = createSlice({
   reducers: {
 
     updateData: (state, action) => {
-      const { sourceId, items, sourceIndex, destinationIndex } = action.payload;
+        const { sourceId, sourceIndex, destinationIndex } = action.payload;
 
-      const prevData = { ...state.data };
-      const sourceTasks = prevData[sourceId].tasks.slice(); // Create a copy of the tasks array
-
-      // Remove the dragged item from its current position
-      const [removed] = sourceTasks.splice(sourceIndex, 1);
-
-      // Insert the dragged item at the new position
-      sourceTasks.splice(destinationIndex, 0, removed);
-
-      // Update the tasks array with the reordered tasks
-      prevData[sourceId].tasks = sourceTasks;
-      state.data = prevData;
-
-     console.log(sourceId,prevData,sourceIndex,destinationIndex);
+        const prevData = { ...state.data };
+        const sourceTasks = [...prevData[sourceId].tasks]; // create a copy of the tasks array
+  
+        // remove the dragged item from its current position
+        const [removed] = sourceTasks.splice(sourceIndex, 1);
+  
+        // insert the dragged item at the new position
+        sourceTasks.splice(destinationIndex, 0, removed);
+  
+        state.data = {
+          ...state.data,
+          [sourceId]: {
+            ...state.data[sourceId],
+            tasks: sourceTasks,
+          },
+        };
 
     },
 
     movedData:(state,action)=>{
 
-        const { sourceTasks, destinationTasks, source, destination } = action.payload;
 
-        const sourceId = parseInt(source.droppableId);
-        const destinationId = parseInt(destination.droppableId);
-      
-        const prevData = {...state.data}; // Create a copy of the data 
-      
-        const srcClone = [...sourceTasks];
-        const destClone = [...destinationTasks];
-      
-        const [removed] = srcClone.splice(source.index, 1);
-      
-        const updatedRemoved = { ...removed, status: prevData[destinationId].status };
-      
-        destClone.splice(destination.index, 0, updatedRemoved);
-      
-        prevData[sourceId].tasks = srcClone;
-        prevData[destinationId].tasks = destClone;
-      
-        state.data = prevData;
 
+const { source, destination } = action.payload;
+
+const sourceId = parseInt(source.droppableId);
+const destinationId = parseInt(destination.droppableId);
+
+const sourceTasks = [...state.data[sourceId].tasks];
+const destinationTasks = [...state.data[destinationId].tasks];
+
+const [removed] = sourceTasks.splice(source.index, 1);
+
+destinationTasks.splice(destination.index, 0, removed);
+
+state.data = {
+  ...state.data,
+  [sourceId]: {
+    ...state.data[sourceId],
+    tasks: sourceTasks,
+  },
+  [destinationId]: {
+    ...state.data[destinationId],
+    tasks: destinationTasks,
+  },
+};
 
     },
-    showState: (state) => {
-        // return { data: JSON.parse(JSON.stringify(state.data)) };
-      }
   },
 });
 
 
-export const {updateData,movedData,showState} = dataSlice.actions
+export const {updateData,movedData} = dataSlice.actions
 
 export default dataSlice.reducer
 
