@@ -8,8 +8,8 @@ const Filter = () => {
           
            <input type="text" placeholder="Search for task, assignee,type" className="w-[20rem] h-10 p-2 outline-0 shadow-sm border rounded-md"/>
            
-           <select className="h-10 p-2 outline-0 shadow-sm border rounded-md text-[#00000087] ml-3">
-            <option disabled>Select Severity</option>
+           <select className="h-10 p-2 outline-0 shadow-sm border rounded-md text-[#00000087] ml-3 cursor-pointer" defaultValue="default">
+            <option value="default" disabled>Select Severity</option>
             <option>All</option>
             <option>Low</option>
             <option>Medium</option>
