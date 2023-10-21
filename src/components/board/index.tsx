@@ -10,9 +10,10 @@ const Board = () => {
 const data = useSelector((state)=>state.dummyData.data);
 const dispatch = useDispatch();
 
-
+console.log(data); 
 
   const onDragEnd = useCallback((result: DropResult) => {
+
     const { source, destination } = result;
 
     let sourceId = parseInt(source.droppableId);
@@ -20,31 +21,27 @@ const dispatch = useDispatch();
     let destinationId = parseInt(destination?.droppableId!);
     let destinationIndex = destination?.index;
 
-//  dispatch(showState());
-
 
     if (!destination) return;
     if (destinationId === sourceId && destinationIndex === sourceIndex) return;
 
     if(sourceId==destinationId){
-      const items  = data[sourceId].tasks;
+      const items  = data[sourceId]?.tasks;
      dispatch(updateData({sourceId,items,sourceIndex,destinationIndex}));
     }
     else{
 
-      const sourceTasks = data[sourceId].tasks;
-      const destinationTasks = data[destinationId].tasks;
+      const sourceTasks = data[sourceId]?.tasks;
+      const destinationTasks = data[destinationId]?.tasks;
       dispatch(movedData({sourceTasks,destinationTasks,source,destination,data}));
 
     }
-  
-
-
+  console.log(result);
   }, []);
 
 
 
-console.log(data);
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {

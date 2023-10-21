@@ -22,6 +22,7 @@
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.2",
     "immer": "^10.0.3",
+    "lodash": "^4.17.21",
     "next": "13.5.2",
     "postcss": "8.4.30",
     "react": "18.2.0",
@@ -33,6 +34,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.200",
     "@types/react-beautiful-dnd": "^13.1.4",
     "@types/uuid": "^9.0.5"
   }

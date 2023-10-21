@@ -3,6 +3,8 @@ import AddIcon from "@mui/icons-material/Add";
 import SingleTask from "../singleTask";
 import { Droppable } from "react-beautiful-dnd";
 import NewTaskModal from "../newTask";
+import { useDispatch } from "react-redux";
+import { changeStatus } from "@/reducers/Data";
 
 
 
@@ -21,11 +23,12 @@ type Props = {
 };
 
 const Task = ({ id, tasks, status }: Props) => {
-  
+
   const [openInputHead, setOpenInputHead] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [openModal, setOpenModal] = useState(false);
-  
+  const dispatch = useDispatch();
+
   const handleInputBlur = () => {
     setOpenInputHead(false);
   };
@@ -38,9 +41,12 @@ const Task = ({ id, tasks, status }: Props) => {
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const colId = parseInt(e.target.id);
-    const newStatus = e.target.value;
+    const newStatus = e.target.value.trim(); 
 
-  
+    if (newStatus !== '') {
+      dispatch(changeStatus({ colId, newStatus }));
+    }
+
   };
 
   
