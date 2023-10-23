@@ -229,7 +229,8 @@ export const dataSlice = createSlice({
         status: state.data[destinationId].status,
       };
 
-      const originalTaskIndex = state.tasks.findIndex(  // changing task's status on drop
+      const originalTaskIndex = state.tasks.findIndex(
+        // changing task's status on drop
         (task) => task.id === updatedTask.id
       );
       if (originalTaskIndex !== -1) {
@@ -252,16 +253,24 @@ export const dataSlice = createSlice({
     createNewTask: (state, action) => {
       const { newTask, columnId } = action.payload;
       console.log(newTask);
-      state.data[columnId].tasks = [...state.data[columnId].tasks,newTask];
+      state.data[columnId].tasks = [...state.data[columnId].tasks, newTask];
       state.tasks.push(newTask);
     },
     changeStatus: (state, action) => {
       const { colId, newStatus } = action.payload;
       state.data[colId].status = newStatus;
       state.columns[colId].status = newStatus;
-       
 
+      state.data[colId].tasks.map((item) => {
+        item.status = newStatus;
+
+        state.tasks.map((task) => {
+          if (task.id === item.id) task.status = newStatus;
+         });
+      });
     },
+
+
   },
 });
 
@@ -274,4 +283,3 @@ export const {
 } = dataSlice.actions;
 
 export default dataSlice.reducer;
-
