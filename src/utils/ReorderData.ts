@@ -2,7 +2,6 @@ import { ReorderData } from "@/reducers/Data";
 import { Dispatch } from "@reduxjs/toolkit";
 
 type Tasks = {
-  tasks: {
     id: string;
     title: string;
     summary: string;
@@ -11,7 +10,6 @@ type Tasks = {
     priority: string;
     date: string;
   }[];
-};
 
 type Columns = {
   data: {

@@ -72,7 +72,7 @@ const initialState: DummyData = {
       status: "Resources",
       assignee: "Ivy",
       priority: "Low",
-      date: "May 15th 23",
+      date: "Mon Oct 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "a2",
@@ -81,7 +81,7 @@ const initialState: DummyData = {
       status: "Resources",
       assignee: "Ivy",
       priority: "Medium",
-      date: "May 15th 23",
+      date: "Tue May 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "a3",
@@ -90,7 +90,7 @@ const initialState: DummyData = {
       status: "Resources",
       assignee: "Ken",
       priority: "Low",
-      date: "May 15th 23",
+      date: "Mon Jun 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "a4",
@@ -99,7 +99,7 @@ const initialState: DummyData = {
       status: "Resources",
       assignee: "Lucy",
       priority: "Highest",
-      date: "May 15th 23",
+      date: "Mon Oct 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "b7",
@@ -108,7 +108,7 @@ const initialState: DummyData = {
       status: "Todo",
       assignee: "Rick",
       priority: "Low",
-      date: "May 15th 23",
+      date: "Mon Jan 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "b8",
@@ -117,7 +117,7 @@ const initialState: DummyData = {
       status: "Todo",
       assignee: "Ivy",
       priority: "Highest",
-      date: "May 15th 23",
+      date: "Mon Feb 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "b9",
@@ -126,7 +126,7 @@ const initialState: DummyData = {
       status: "Todo",
       assignee: "Ivy",
       priority: "Low",
-      date: "May 15th 23",
+      date: "Mon Apr 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "c13",
@@ -135,7 +135,7 @@ const initialState: DummyData = {
       status: "Doing",
       assignee: "Glen",
       priority: "Medium",
-      date: "May 15th 23",
+      date: "Mon Oct 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "c14",
@@ -144,7 +144,7 @@ const initialState: DummyData = {
       status: "Doing",
       assignee: "Lori",
       priority: "Low",
-      date: "May 15th 23",
+      date: "Mon Jan 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "c15",
@@ -153,7 +153,7 @@ const initialState: DummyData = {
       status: "Doing",
       assignee: "Daryl",
       priority: "Low",
-      date: "May 15th 23",
+      date: "Mon Mar 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "d19",
@@ -162,7 +162,7 @@ const initialState: DummyData = {
       status: "Done",
       assignee: "Tony",
       priority: "Low",
-      date: "May 15th 23",
+      date: "Mon Mar 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "d20",
@@ -171,7 +171,7 @@ const initialState: DummyData = {
       status: "Done",
       assignee: "Ivy",
       priority: "Low",
-      date: "May 15th 23",
+      date: "Mon May 23 2023 20:21:05 GMT+0530",
     },
     {
       id: "d21",
@@ -180,7 +180,7 @@ const initialState: DummyData = {
       status: "Done",
       assignee: "Carl",
       priority: "Medium",
-      date: "May 15th 23",
+      date: "Mon May 23 2023 20:21:05 GMT+0530",
     },
   ],
 };
@@ -190,7 +190,6 @@ export const dataSlice = createSlice({
   initialState,
   reducers: {
     ReorderData: (state, action) => {
-      console.log(action.payload);
       state.data = action.payload;
     },
     updateData: (state, action) => {
@@ -230,7 +229,7 @@ export const dataSlice = createSlice({
         status: state.data[destinationId].status,
       };
 
-      const originalTaskIndex = state.tasks.findIndex(
+      const originalTaskIndex = state.tasks.findIndex(  // changing task's status on drop
         (task) => task.id === updatedTask.id
       );
       if (originalTaskIndex !== -1) {
@@ -252,11 +251,16 @@ export const dataSlice = createSlice({
     },
     createNewTask: (state, action) => {
       const { newTask, columnId } = action.payload;
-      state.data[columnId].tasks.push(newTask);
+      console.log(newTask);
+      state.data[columnId].tasks = [...state.data[columnId].tasks,newTask];
+      state.tasks.push(newTask);
     },
     changeStatus: (state, action) => {
       const { colId, newStatus } = action.payload;
       state.data[colId].status = newStatus;
+      state.columns[colId].status = newStatus;
+       
+
     },
   },
 });
@@ -271,145 +275,3 @@ export const {
 
 export default dataSlice.reducer;
 
-// data: {
-//   0: {
-//     status: "Resources",
-//     tasks: [
-//       {
-//         id: "a1",
-//         title: "task-1",
-//         summary: "",
-//         status: "Resources",
-//         assignee: "Ivy",
-//         priority:"Low",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "a2",
-//         title: "task-2",
-//         summary: "",
-//         status: "Resources",
-//         assignee: "Ivy",
-//         priority:"Medium",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "a3",
-//         title: "task-3",
-//         summary: "",
-//         status: "Resources",
-//         assignee: "Ivy",
-//         priority:"Low",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "a4",
-//         title: "task-4",
-//         summary: "",
-//         status: "Resources",
-//         assignee: "Ivy",
-//         priority:"Highest",
-//         date: "May 15th 23",
-//       },
-//     ],
-//   },
-
-//   1: {
-//     status: "Todo",
-//     tasks: [
-//       {
-//         id: "b7",
-//         title: "task-7",
-//         summary: "",
-//         status: "Todo",
-//         assignee: "Ivy",
-//         priority:"Low",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "b8",
-//         title: "task-8",
-//         summary: "",
-//         status: "Todo",
-//         assignee: "Ivy",
-//         priority:"Highest",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "b9",
-//         title: "task-9",
-//         summary: "",
-//         status: "Todo",
-//         assignee: "Ivy",
-//         priority:"Low",
-//         date: "May 15th 23",
-//       },
-//     ],
-//   },
-
-//   2: {
-//     status: "Doing",
-//     tasks: [
-//       {
-//         id: "c13",
-//         title: "task-13",
-//         summary: "",
-//         status: "Doing",
-//         assignee: "Ivy",
-//         priority:"Medium",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "c14",
-//         title: "task-14",
-//         summary: "",
-//         status: "Doing",
-//         assignee: "Ivy",
-//         priority:"Low",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "c15",
-//         title: "task-15",
-//         summary: "",
-//         status: "Doing",
-//         assignee: "Ivy",
-//         priority:"Low",
-//         date: "May 15th 23",
-//       },
-//     ],
-//   },
-
-//   3: {
-//     status: "Done",
-//     tasks: [
-//       {
-//         id: "d19",
-//         title: "task-19",
-//         summary: "",
-//         status: "Done",
-//         assignee: "Ivy",
-//         priority:"Low",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "d20",
-//         title: "task-20",
-//         summary: "",
-//         status: "Done",
-//         assignee: "Ivy",
-//         priority:"Low",
-//         date: "May 15th 23",
-//       },
-//       {
-//         id: "d21",
-//         title: "task-21",
-//         summary: "",
-//         status: "Done",
-//         assignee: "Ivy",
-//         priority:"Medium",
-//         date: "May 15th 23",
-//       },
-//     ],
-//   },
-// },

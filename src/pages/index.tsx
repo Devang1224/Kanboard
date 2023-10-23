@@ -9,22 +9,14 @@ import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useDispatch } from 'react-redux'
-import { reorderData } from '@/services/ReorderData'
+import { reorderData } from '@/utils/ReorderData'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const columns = useSelector((state)=>state.dummyData.columns);
-  const tasks = useSelector((state)=>state.dummyData.tasks);
-
  const dispatch = useDispatch();
 
-
-useEffect(()=>{
-      
-reorderData(dispatch,columns,tasks);
-},[])
 
 
   return (

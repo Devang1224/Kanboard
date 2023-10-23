@@ -1,6 +1,5 @@
 import Modal from "@mui/material/Modal";
 import { useEffect, useState } from "react";
-import formatedDate from "@/utils/formatDate";
 import generateTaskId from "@/utils/generateNewtaskId";
 import { useDispatch } from "react-redux";
 import { createNewTask } from "@/reducers/Data";
@@ -99,7 +98,7 @@ e.stopPropagation();
                 required
                 onChange={(e) => {
                   const newTaskId = generateTaskId();
-                  const todaysDate = formatedDate();
+                  const todaysDate = `${new Date()}`;
                   setNewTask({
                     ...newTask,
                     assignee: e.target.value,

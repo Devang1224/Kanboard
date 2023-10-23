@@ -21,6 +21,8 @@ const SingleTask = ({
   priority,
   date,
 }: Props) => {
+
+
   return (
     <Draggable draggableId={id} index={index} key={id}>
       {(provided, snapshot) => (
@@ -47,7 +49,7 @@ const SingleTask = ({
             <p>
               <span className="text-[#5E6C84]">Assignee:</span> {assignee}
             </p>
-            <div className={` p-[5px] rounded-[40px] text-[13px]`}>{date}</div>
+            <div className={` p-[5px] rounded-[40px] text-[13px]`}>{formatedDate(date)}</div>
           </div>
         </div>
       )}

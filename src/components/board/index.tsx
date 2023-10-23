@@ -3,14 +3,47 @@ import Task from "../task";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { movedData, updateData } from "@/reducers/Data";
+import { dateFilter, priorityFilter, searchFilter } from "@/utils/filterFunctions";
+import { reorderData } from "@/utils/ReorderData";
 
 const Board = () => {
 
   const [isBrowser, setIsBrowser] = useState(false);
 const data = useSelector((state)=>state.dummyData.data);
+const filters = useSelector((state)=>state.filterReducer);
+const columns = useSelector(state=>state.dummyData.columns)
+const tasks = useSelector((state)=>state.dummyData.tasks);
+
 const dispatch = useDispatch();
 
-console.log(data); 
+
+useEffect(()=>{
+
+  let filteredTasks = [...tasks];
+
+if(filters.search!="")
+{
+  filteredTasks = searchFilter(filteredTasks,filters.search)
+}
+
+if(filters.priority!="")
+{
+  filteredTasks = priorityFilter(filteredTasks,filters.priority);
+}
+
+if(filters.date.from!="" || filters.date.to!="")
+{
+ filteredTasks = dateFilter(filteredTasks,filters.date);
+
+}
+
+console.log(filteredTasks);
+
+reorderData(dispatch,columns,filteredTasks);
+
+},[filters])
+
+
 
   const onDragEnd = useCallback((result: DropResult) => {
 
@@ -36,7 +69,7 @@ console.log(data);
       dispatch(movedData({sourceTasks,destinationTasks,source,destination,data}));
 
     }
-  console.log(result);
+
   }, []);
 
 

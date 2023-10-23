@@ -6,9 +6,9 @@ const monthNames = [
   ];
  
 
-export default function formatedDate(){
+export default function formatedDate(dateString:string){
 
-    const date = new Date();
+    const date = new Date(dateString);
     const month = monthNames[date.getMonth()];
     const day = date.getDate();
     const year = date.getFullYear().toString().slice(-2);
@@ -16,3 +16,5 @@ export default function formatedDate(){
 
     return formattedDate;
 }
+
+
