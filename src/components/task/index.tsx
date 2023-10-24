@@ -71,7 +71,7 @@ const Task = ({ id, tasks, status }: Props) => {
           />
         ) : (
           <h1
-            className="p-1 pl-2 text-[#5E6C84]  cursor-pointer hover:bg-[#5e6c8424] hover:rounded-md "
+            className="p-1 pl-2 text-[#5E6C84]  cursor-pointer hover:bg-[#5e6c8424] hover:rounded-md overflow-x-scroll whitespace-nowrap"
             onClick={() => setOpenInputHead(true)}
           >
             {status}

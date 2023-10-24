@@ -59,7 +59,7 @@ if(fromDate>toDate)
     if (from === "" && to === "") {
       return true;
     } else if (from !== "" && to !== "") {
-      return itemDate >= fromDate && itemDate <= toDate;
+      return (itemDate >= fromDate && itemDate <= toDate); 
     } else if (from !== "") {
       return itemDate >= fromDate;
     } else if (to !== "") {

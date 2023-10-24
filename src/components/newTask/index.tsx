@@ -72,7 +72,7 @@ e.stopPropagation();
           />
 
           <label htmlFor="summary" className="text-[#525e73] text-lg p-1 mt-1">
-            Summary:
+            Description:
           </label>
           <textarea
             id="summary"

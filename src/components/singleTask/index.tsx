@@ -1,5 +1,9 @@
 import formatedDate from "@/utils/formatDate";
 import { Draggable } from "react-beautiful-dnd";
+import Modal from '@mui/material/Modal';
+import { useState } from "react";
+import TaskDetails from "../taskDetails";
+
 
 type Props = {
   id: string;
@@ -20,10 +24,13 @@ const SingleTask = ({
   index,
   priority,
   date,
+  summary
 }: Props) => {
 
+  
+  const [openTaskDetailsModal,setTaskDetailsModal] = useState(false);
 
-  return (
+  return (<>
     <Draggable draggableId={id} index={index} key={id}>
       {(provided, snapshot) => (
         <div
@@ -34,8 +41,10 @@ const SingleTask = ({
         >
           <h1 className="text-[1.2rem]">{title}</h1>
           <div className="flex justify-between">
-            <p className=" text-[#5E6C84] text-[15px] pt-1 cursor-pointer hover:underline w-max">
-              Summary for Task-1
+            <p className=" text-[#5E6C84] text-[15px] pt-1 cursor-pointer hover:underline w-max"
+            onClick={()=>setTaskDetailsModal(true)}
+            >
+              Description
             </p>
             <div
               className={`pr-2 pl-2 mr-1 border rounded-md text-green-500 border-green-500 
@@ -54,6 +63,23 @@ const SingleTask = ({
         </div>
       )}
     </Draggable>
+    
+    <Modal
+        open={openTaskDetailsModal}
+        onClose={()=>setTaskDetailsModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+       <TaskDetails 
+       title={title}
+       assignee={assignee}
+       status={status}
+       description={summary}
+       priority={priority}
+       date={date}
+       />
+      </Modal>
+    </>
   );
 };
 
