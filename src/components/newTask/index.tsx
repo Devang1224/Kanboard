@@ -76,7 +76,6 @@ e.stopPropagation();
           </label>
           <textarea
             id="summary"
-            maxLength={255}
             className="h-[6rem] resize-none p-1 outline-none shadow-custom rounded-md "
             onChange={(e) => {
               setNewTask({ ...newTask, summary: e.target.value });

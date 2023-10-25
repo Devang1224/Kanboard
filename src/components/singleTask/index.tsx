@@ -69,7 +69,7 @@ const SingleTask = ({
         onClose={()=>setTaskDetailsModal(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-      >
+      ><>
        <TaskDetails 
        title={title}
        assignee={assignee}
@@ -77,7 +77,7 @@ const SingleTask = ({
        description={summary}
        priority={priority}
        date={date}
-       />
+       /></>
       </Modal>
     </>
   );

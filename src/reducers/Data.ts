@@ -40,6 +40,8 @@ export interface DummyData {
       }[];
     };
   };
+
+  statusError:Boolean,
 }
 
 const initialState: DummyData = {
@@ -62,6 +64,8 @@ const initialState: DummyData = {
       status: "Done",
       tasks: [],
     },
+   
+   
   },
 
   tasks: [
@@ -183,6 +187,8 @@ const initialState: DummyData = {
       date: "Mon May 23 2023 20:21:05 GMT+0530",
     },
   ],
+  statusError:false,
+
 };
 
 export const dataSlice = createSlice({
@@ -258,19 +264,30 @@ export const dataSlice = createSlice({
     },
     changeStatus: (state, action) => {
       const { colId, newStatus } = action.payload;
-      state.data[colId].status = newStatus;
-      state.columns[colId].status = newStatus;
 
-      state.data[colId].tasks.map((item) => {
-        item.status = newStatus;
+      const isValidStatus = Object.entries(state.columns).filter(
+        ([key, item]) => {
+          if (state.columns[key].status == newStatus) {
+            return true;
+          }
+        }
+      );
 
-        state.tasks.map((task) => {
-          if (task.id === item.id) task.status = newStatus;
-         });
-      });
+      if (!isValidStatus.length) {
+        state.data[colId].status = newStatus;
+        state.columns[colId].status = newStatus;
+
+        state.data[colId].tasks.map((item) => {
+          item.status = newStatus;
+
+          state.tasks.map((task) => {
+            if (task.id === item.id) task.status = newStatus;
+          });
+        });
+      }
+
+
     },
-
-
   },
 });
 

@@ -1,18 +1,20 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import Task from "../task";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, DragStart, DragUpdate, DropResult } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { movedData, updateData } from "@/reducers/Data";
 import { dateFilter, priorityFilter, searchFilter } from "@/utils/filterFunctions";
 import { reorderData } from "@/utils/ReorderData";
 
+
 const Board = () => {
 
-  const [isBrowser, setIsBrowser] = useState(false);
+const [isBrowser, setIsBrowser] = useState(false);
 const data = useSelector((state)=>state.dummyData.data);
 const filters = useSelector((state)=>state.filterReducer);
 const columns = useSelector(state=>state.dummyData.columns)
 const tasks = useSelector((state)=>state.dummyData.tasks);
+
 
 const dispatch = useDispatch();
 
@@ -69,10 +71,7 @@ reorderData(dispatch,columns,filteredTasks);
       dispatch(movedData({sourceTasks,destinationTasks,source,destination,data}));
 
     }
-
   }, []);
-
-
 
 
 
@@ -85,17 +84,19 @@ reorderData(dispatch,columns,filteredTasks);
 
 
   return (
-    <div className="w-full  h-[70%] flex items-center p-10">
+    <div className="w-[100vw] h-[70%] flex items-center p-10 ">
       {isBrowser && (
         <DragDropContext
           onDragEnd={onDragEnd}
         >
-          <div className="w-full h-full  p-1 flex gap-3">
+          <div className="w-full h-full p-1 flex gap-3 overflow-x-auto" >
+
             {
               Object.entries(data)?.map(([columnKey,item]) => (
                 <Task tasks={item.tasks} status={item.status} id={columnKey} key={columnKey} />
               ))
             }
+
           </div>
         </DragDropContext>
       )}

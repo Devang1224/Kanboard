@@ -5,7 +5,7 @@ import { Droppable } from "react-beautiful-dnd";
 import NewTaskModal from "../newTask";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "@/reducers/Data";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 
 type Props = {
@@ -27,6 +27,8 @@ const Task = ({ id, tasks, status }: Props) => {
   const [openInputHead, setOpenInputHead] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [openModal, setOpenModal] = useState(false);
+
+
   const dispatch = useDispatch();
 
   const handleInputBlur = () => {
@@ -39,9 +41,11 @@ const Task = ({ id, tasks, status }: Props) => {
     }
   }, [openInputHead]);
 
+
+
   const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const colId = parseInt(e.target.id);
-    const newStatus = e.target.value.trim(); 
+    const newStatus = e.target.value.trim();
 
     if (newStatus !== '') {
       dispatch(changeStatus({ colId, newStatus }));
@@ -49,11 +53,13 @@ const Task = ({ id, tasks, status }: Props) => {
 
   };
 
+
   
 
 
   return (
-    <div className="w-[24%] bg-[#e7e8e9] rounded-xl p-1 pt-0 overflow-auto ">
+    <>
+    <div className="min-w-[24%] h-full bg-[#e7e8e9] rounded-xl p-1 pt-0 overflow-y-auto ">
       <div className="p-2 h-12 sticky bg-[#e7e8e9] z-10 top-0">
         {openInputHead ? (
           <input
@@ -115,6 +121,8 @@ const Task = ({ id, tasks, status }: Props) => {
 
     
     </div>
+   
+    </>
   );
 };
 
