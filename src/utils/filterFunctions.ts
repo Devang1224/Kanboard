@@ -15,8 +15,7 @@ type DateObj = {
 
 ///////// Search Filter /////////////////
 export const searchFilter = (tasks: Tasks, searchText: string) => {
-  const searchResults = tasks
-    .map((item) => {
+  const searchResults = tasks.filter((item) => {
       if (
         item.title.toLowerCase().includes(searchText) ||
         item.assignee.toLowerCase().includes(searchText) ||
@@ -25,10 +24,10 @@ export const searchFilter = (tasks: Tasks, searchText: string) => {
         return item;
       }
     })
-    .filter((item) => item !== undefined);
 
   return searchResults;
 };
+
 
 
 ///////// Priority Filter /////////////////

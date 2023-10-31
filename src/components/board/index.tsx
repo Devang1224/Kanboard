@@ -5,18 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { movedData, updateData } from "@/reducers/Data";
 import { dateFilter, priorityFilter, searchFilter } from "@/utils/filterFunctions";
 import { reorderData } from "@/utils/ReorderData";
+import { RootState } from "@/store/store";
 
 
 const Board = () => {
 
 const [isBrowser, setIsBrowser] = useState(false);
-const data = useSelector((state)=>state.dummyData.data);
-const filters = useSelector((state)=>state.filterReducer);
-const columns = useSelector(state=>state.dummyData.columns)
-const tasks = useSelector((state)=>state.dummyData.tasks);
+const data = useSelector((state:RootState)=>state.dummyData.data);
+const filters = useSelector((state:RootState)=>state.filterReducer);
+const columns = useSelector((state:RootState)=>state.dummyData.columns)
+const tasks = useSelector((state:RootState)=>state.dummyData.tasks);
 
 
 const dispatch = useDispatch();
+
 
 
 useEffect(()=>{
@@ -25,7 +27,7 @@ useEffect(()=>{
 
 if(filters.search!="")
 {
-  filteredTasks = searchFilter(filteredTasks,filters.search)
+  filteredTasks = searchFilter(filteredTasks,filters.search);
 }
 
 if(filters.priority!="")
@@ -36,10 +38,9 @@ if(filters.priority!="")
 if(filters.date.from!="" || filters.date.to!="")
 {
  filteredTasks = dateFilter(filteredTasks,filters.date);
-
 }
 
-console.log(filteredTasks);
+
 
 reorderData(dispatch,columns,filteredTasks);
 

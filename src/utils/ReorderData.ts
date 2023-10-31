@@ -12,7 +12,6 @@ type Tasks = {
   }[];
 
 type Columns = {
-  data: {
     [key: number]: {
       status: string;
       tasks: {
@@ -26,7 +25,7 @@ type Columns = {
       }[];
     };
   };
-};
+
 
 
 
@@ -40,9 +39,10 @@ export const reorderData = async (
   try {
     Object.entries(reorderedData)?.map(([columnKey, item]) => {
       for (const ind in tasks) {
-        if (tasks[ind].status == item.status) {
-          item.tasks.push(tasks[ind]);
-        }
+        const typedItem: { status: string; tasks: Tasks } = item as { status: string; tasks: Tasks };
+        if (tasks[ind].status === typedItem.status) {
+          typedItem.tasks.push(tasks[ind]);
+         }
       }
     });
 

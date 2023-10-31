@@ -3,7 +3,7 @@ import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 
 export interface DummyData {
   data: {
-    [key: number]: {
+    [key:number]: {
       status: string;
       tasks: {
         id: string;
@@ -258,20 +258,15 @@ export const dataSlice = createSlice({
     },
     createNewTask: (state, action) => {
       const { newTask, columnId } = action.payload;
-      console.log(newTask);
       state.data[columnId].tasks = [...state.data[columnId].tasks, newTask];
       state.tasks.push(newTask);
     },
     changeStatus: (state, action) => {
       const { colId, newStatus } = action.payload;
 
-      const isValidStatus = Object.entries(state.columns).filter(
-        ([key, item]) => {
-          if (state.columns[key].status == newStatus) {
-            return true;
-          }
-        }
-      );
+        const isValidStatus = Object.keys(state.columns).filter((key) => {
+            return state.columns[parseInt(key)].status === newStatus;
+        });
 
       if (!isValidStatus.length) {
         state.data[colId].status = newStatus;

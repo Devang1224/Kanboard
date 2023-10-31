@@ -24,7 +24,6 @@ export const filterSlice = createSlice({
          else 
          { state.search = ""}
 
-         console.log(searchText);
       },
       
       priorityFilter:(state,action)=>{
@@ -35,7 +34,6 @@ export const filterSlice = createSlice({
         {state.priority = priority}
         else state.priority = "";
 
-        console.log("priority",priority);
       },
 
       dateFilter:(state,action)=>{
