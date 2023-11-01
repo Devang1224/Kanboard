@@ -85,7 +85,7 @@ reorderData(dispatch,columns,filteredTasks);
 
 
   return (
-    <div className="w-[100vw] h-[70%] flex items-center p-10 ">
+    <div className="w-[100vw] h-[70%] flex items-center p-10 dark:bg-[#292929] ">
       {isBrowser && (
         <DragDropContext
           onDragEnd={onDragEnd}

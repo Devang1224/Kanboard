@@ -34,14 +34,14 @@ const SingleTask = ({
     <Draggable draggableId={id} index={index} key={id}>
       {(provided, snapshot) => (
         <div
-          className={`h-[25%] p-2 pl-3 shadow-custom-2 mb-2 bg-white`}
+          className={`h-[25%] p-2 pl-3 shadow-custom-2 mb-2 bg-white dark:bg-[#363636] dark:text-[#d0cfcf]`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
           <h1 className="text-[1.2rem]">{title}</h1>
           <div className="flex justify-between">
-            <p className=" text-[#5E6C84] text-[15px] pt-1 cursor-pointer hover:underline w-max"
+            <p className=" text-[#5E6C84] text-[15px] pt-1 cursor-pointer hover:underline w-max dark:text-[#80878F]"
             onClick={()=>setTaskDetailsModal(true)}
             >
               Description
@@ -57,7 +57,7 @@ const SingleTask = ({
           </div>
           <div className="flex w-full justify-between pt-2">
             <p>
-              <span className="text-[#5E6C84]">Assignee:</span> {assignee}
+              <span className="text-[#5E6C84] dark:text-[#C6C6C6]">Assignee:</span> {assignee}
             </p>
             <div className={` p-[5px] rounded-[40px] text-[13px]`}>{formatedDate(date)}</div>
           </div>

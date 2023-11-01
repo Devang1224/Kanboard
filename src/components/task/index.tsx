@@ -27,11 +27,17 @@ const Task = ({ id, tasks, status }: Props) => {
   const [openInputHead, setOpenInputHead] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [openModal, setOpenModal] = useState(false);
+  const[newStatus,setNewStatus] = useState({colId:-1,status:''});
 
 
   const dispatch = useDispatch();
 
   const handleInputBlur = () => {
+    const changedStatus = newStatus.status;
+    const columnId = newStatus.colId;
+    if (changedStatus !== '') {
+      dispatch(changeStatus({ colId:columnId, newStatus:changedStatus }));
+    }
     setOpenInputHead(false);
   };
 
@@ -46,10 +52,7 @@ const Task = ({ id, tasks, status }: Props) => {
   const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const colId = parseInt(e.target.id);
     const newStatus = e.target.value.trim();
-
-    if (newStatus !== '') {
-      dispatch(changeStatus({ colId, newStatus }));
-    }
+     setNewStatus({colId,status:newStatus});
 
   };
 
@@ -59,8 +62,8 @@ const Task = ({ id, tasks, status }: Props) => {
 
   return (
     <>
-    <div className="min-w-[24%] h-full bg-[#e7e8e9] rounded-xl p-1 pt-0 overflow-y-auto ">
-      <div className="p-2 h-12 sticky bg-[#e7e8e9] z-10 top-0">
+    <div className="min-w-[24%] h-full bg-[#e7e8e9] rounded-xl p-1 pt-0 overflow-y-auto dark:bg-[#454545]">
+      <div className="p-2 h-12 sticky bg-[#e7e8e9] z-10 top-0 dark:bg-[#454545]">
         {openInputHead ? (
           <input
             type="text autofocus"
@@ -71,13 +74,13 @@ const Task = ({ id, tasks, status }: Props) => {
             onChange={handleStatusChange}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
-                setOpenInputHead(false);
+               handleInputBlur()
               }
             }}
           />
         ) : (
           <h1
-            className="p-1 pl-2 text-[#5E6C84]  cursor-pointer hover:bg-[#5e6c8424] hover:rounded-md overflow-x-scroll whitespace-nowrap"
+            className="p-1 pl-2 text-[#5E6C84]  cursor-pointer hover:bg-[#5e6c8424] hover:rounded-md overflow-x-scroll whitespace-nowrap dark:text-[#e9e7e7] dark:hover:bg-[#b4cbf324]"
             onClick={() => setOpenInputHead(true)}
           >
             {status}
@@ -112,7 +115,7 @@ const Task = ({ id, tasks, status }: Props) => {
       </Droppable>
 
       <div
-        className="flex items-center p-2 text-[#5E6C84] hover:bg-[#5e6c8434] cursor-pointer mt-2"
+        className="flex items-center p-2 text-[#5E6C84] hover:bg-[#5e6c8434] cursor-pointer mt-2 dark:text-[#d0cfcf]"
         onClick={() => setOpenModal(true)}
       >
         <AddIcon/> Create Task

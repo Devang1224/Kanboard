@@ -50,21 +50,21 @@ dispatch(clearFilters());
 }
 
     return (
-        <div className=" border h-[15vh] pt-5 p-10">
+        <div className="border border-x-0 h-[15vh] pt-5 p-10 dark:bg-[#292929]">
             
-          <h2 className="text-[20px] text-[#00000099] ">Filters:</h2>
+          <h2 className="text-[20px] text-[#00000099] dark:text-white ">Filters:</h2>
 
-          <div className="w-full p-5 pt-3 pl-0 flex">
+          <div className="rw-full p-5 pt-3 pl-0 flex">
           
            <input 
              type="text" placeholder="Search for task, assignee, priority"
-             className="w-[20rem] h-10 p-2 outline-0 shadow-sm border rounded-md"
+             className="w-[20rem] h-10 p-2 outline-none shadow-sm border rounded-md dark:bg-[#454545] dark:border-none dark:text-white"
              onChange={debouncedSearch}
              ref={searchTextRef}
              />
            
            <select 
-             className="h-10 p-2 outline-0 shadow-sm border rounded-md text-[#00000087] ml-3 cursor-pointer" 
+             className="h-10 p-2 outline-0 shadow-sm border rounded-md text-[#00000087] ml-3 cursor-pointer dark:bg-[#454545] dark:border-none dark:text-[#d0cfcf]" 
              defaultValue="default"
              onChange = {handleSeverityChange}
              ref={priorityRef}
@@ -77,22 +77,22 @@ dispatch(clearFilters());
            </select>
           
           <div className="relative">
-          <p className="absolute top-[-20px] left-4 text-[#00000087]">From</p>
-          <input type="date" className="h-10 p-2 outline-0 shadow-sm border rounded-md text-[#00000087] ml-3"
+          <p className="absolute top-[-20px] left-4 text-[#00000087] dark:text-white">From</p>
+          <input type="date" className="h-10 p-2 outline-0 shadow-sm border rounded-md text-[#00000087] ml-3 dark:bg-[#454545] dark:border-none dark:text-[#d0cfcf]"
            onChange = {(e)=>handleDateFilter("FROM",e)}
            ref={fromDateRef}
           />
           </div>
 
           <div className="relative">
-          <p className="absolute top-[-20px] left-4 text-[#00000087]">To</p>
-          <input type="date" className="h-10 p-2 outline-0 shadow-sm border rounded-md text-[#00000087] ml-3"
+          <p className="absolute top-[-20px] left-4 text-[#00000087] dark:text-white">To</p>
+          <input type="date" className="h-10 p-2 outline-0 shadow-sm border rounded-md text-[#00000087] ml-3 dark:bg-[#454545] dark:border-none dark:text-[#d0cfcf]"
            onChange = {(e)=>handleDateFilter("TO",e)}
            ref={toDateRef}
           />
           </div>
 
-          <button className="p-2  ml-3 shadow-sm border rounded-md bg-[#0077ff]  hover:bg-[#0077ffd6] text-white" onClick={handleClearFilters}>Clear Filters</button>
+          <button className="p-2  ml-3 shadow-sm rounded-md bg-[#0077ff]  hover:bg-[#0077ffd6] text-white" onClick={handleClearFilters}>Clear Filters</button>
 
           </div>
 
