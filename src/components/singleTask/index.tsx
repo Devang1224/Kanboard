@@ -48,8 +48,9 @@ const SingleTask = ({
             </p>
             <div
               className={`pr-2 pl-2 mr-1 border rounded-md text-green-500 border-green-500 
-                        ${ priority == "Highest" && " text-red-500 border-red-500"} 
-                        ${priority == "Medium" &&  " text-orange-500 border-orange-500"  }`}
+                           ${priority === "Highest" ? "text-red-500 border-red-500" : ""}
+                             ${priority === "Medium" ? "text-orange-500 border-orange-500" : ""}`}
+
              >
               {priority}
             </div>

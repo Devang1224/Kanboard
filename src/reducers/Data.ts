@@ -203,8 +203,6 @@ export const dataSlice = createSlice({
 
       const prevData = { ...state.data };
       const sourceTasks = [...prevData[sourceId].tasks]; // create a copy of the tasks array
-
-      // remove the dragged item from its current position
       const [removed] = sourceTasks.splice(sourceIndex, 1);
 
       // insert the dragged item at the new position

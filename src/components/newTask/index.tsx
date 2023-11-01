@@ -97,7 +97,7 @@ e.stopPropagation();
                 required
                 onChange={(e) => {
                   const newTaskId = generateTaskId();
-                  const todaysDate = `${new Date()}`;
+                  const todaysDate = `a{new Date()}`;
                   setNewTask({
                     ...newTask,
                     assignee: e.target.value,
